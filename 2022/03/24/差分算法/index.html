@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <title>差分算法(求解偏微分方程)-Chris's Blog</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/academicons/1.8.6/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    
+
+    
+<link rel="stylesheet" href="/css/adagio.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+<body>
+    <div class="container-fluid">
+    <nav class="nav">
+        <div class="collapse navbar-collapse" id="navbar-sm">
+            
+            
+            <div class="navbar-nav">
+                <a target="_blank" rel="noopener" href="https://www.cnblogs.com/chrisng/" class="nav-item nav-link">博客园</a>
+            </div>
+            
+            <div class="navbar-nav">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_55424334?type=blog" class="nav-item nav-link">CSDN</a>
+            </div>
+            
+            <div class="navbar-nav">
+                <a target="_blank" rel="noopener" href="https://github.com/chrisng2008" class="nav-item nav-link">Github</a>
+            </div>
+            
+        </div>
+    </nav>
+</div>
+
+<div class="d-flex d-md-none" style="width: 100%; background-color: #e9ecef">
+    
+    <div class="nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sm"
+            aria-expanded="false" aria-label="Toggle Navigation">
+            <i class="fas fa-bars fa-lg"></i>
+        </button>
+    </div>
+    
+    <nav class="navbar ml-auto">
+        <a class="navbar-brand" href="/">
+            
+            Chris Blog
+            
+        </a>
+    </nav>
+</div>
+
+
+<div class="container d-none d-md-block my-navbar">
+    <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
+        <a class="navbar-brand " href="/">
+            
+            Chris Blog
+            
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" target="_blank" rel="noopener" href="https://www.cnblogs.com/chrisng/">博客园</a>
+                </li>
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" target="_blank" rel="noopener" href="https://blog.csdn.net/m0_55424334?type=blog">CSDN</a>
+                </li>
+                
+                <li class="nav-item pl-2 pr-2 ">
+                    <a class="nav-link" target="_blank" rel="noopener" href="https://github.com/chrisng2008">Github</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </nav>
+</div>
+
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        
+        <h1 class="mt-4 article-title page-title">差分算法(求解偏微分方程)</h1>
+        
+        <p class="lead text-gray mt-3">By Chris Ng; Published on 2022-03-24</p>
+        
+        <div class="tags">
+            <ul class="tag-list">
+                
+                <li class="tag-list-item">
+                    <a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 pt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <main>
+                            <article class="article-text page-content"><h1 id="差分算法-求解偏微分方程"><a href="#差分算法-求解偏微分方程" class="headerlink" title="差分算法(求解偏微分方程)"></a>差分算法(求解偏微分方程)</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><strong>差分方法</strong>又称为有限差分方法或网格法，是求偏微分方程定解问题的数值解中应用 最广泛的方法之一。它的基本思想是：先对求解区域作网格剖分，将自变量的<strong>连续</strong>变化 区域用有限<strong>离散点</strong>（网格点）集代替；将问题中出现的连续变量的函数用定义在网格点 上离散变量的函数代替；通过用网格点上函数的差商代替导数，将含连续变量的偏微分 方程定解问题化成只含有限个未知数的代数方程组（称为差分格式）。如果差分格式有 解，且当网格无限变小时其解收敛于原微分方程定解问题的解，则差分格式的解就作为 原问题的近似解（数值解）。因此，用差分方法求偏微分方程定解问题一般需要解决一下问题：</p>
+<ol>
+<li>选取网络；</li>
+<li>对微分方程及定解条件选择差分近似，列出差分格式；</li>
+<li>求解差分格式；</li>
+<li>讨论差分格式解对于微分方程解的收敛性及误差估计</li>
+</ol>
+<h2 id="算法详解"><a href="#算法详解" class="headerlink" title="算法详解"></a>算法详解</h2><p><img src="/%E5%B7%AE%E5%88%86%E7%AE%97%E6%B3%95.assets/image-20210728170418328.png" alt="image-20210728170418328"></p>
+<p>因此，只要确定了步长，我们就可以将<strong>连续变化</strong>的自变量用<strong>有限离散点</strong>来表示</p>
+<p><img src="/%E5%B7%AE%E5%88%86%E7%AE%97%E6%B3%95.assets/image-20210728171806257.png" alt="image-20210728171806257"></p>
+<p>对于(9-3)的式子，为了方便计算，我们用差分来表示偏微分方程<br>$$<br>\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2}&#x3D;f(x,y)<br>$$<br>由于式子中进行了<strong>两次偏导</strong>，因此我们一步一步进行分析。</p>
+<p>进行一次差分，我们用<strong>向前差分</strong>。<br>$$<br>\frac{\partial u}{\partial x}&#x3D;\frac{u(k+1,j)-u(k,j)}{h}<br>$$<br>由于向前差分有误差，如果我们进行两次向前差分的话，计算的误差可能会增大，因此，第二次偏导我们选择向后差分。即我们混合向前差分、向后差分来近似代替两次偏导。</p>
+<p>因此，第二次我们用<strong>向后差分</strong><br>$$<br>\begin{aligned}<br>\frac{\partial^2u}{\partial x^2}&amp;&#x3D;\frac{\partial}{\partial x}(\frac{u(k+1,j)-u(k,j)}{h})\<br>&amp; &#x3D; \frac{\partial}{\partial x}(\frac{u(k+1,j)}{h})-\frac{\partial}{\partial x}(\frac{u(k,j)}{h})<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\frac{\partial}{\partial x}(\frac{u(k+1,j)}{h})&amp;&#x3D;\frac{\frac{u(k+1,j)-u(k,j)}{h}\cdot h-0}{h^2}\<br>&amp;&#x3D;\frac{u(k+1,j)-u(k,j)}{h^2}</p>
+<p>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\frac{\partial}{\partial x}(\frac{u(k,j)}{h})&amp;&#x3D;\frac{\frac{u(k,j)-u(k-1,j)}{h}\cdot h-0}{h^2}\<br>&amp;&#x3D;\frac{u(k,j)-u(k-1,j)}{h^2}<br>\end{aligned}<br>$$<br>综上，<br>$$<br>\begin{aligned}<br>\frac{\partial^2u}{\partial x^2}&amp;&#x3D;\frac{\partial}{\partial x}(\frac{u(k+1,j)-u(k,j)}{h})\<br>&amp; &#x3D; \frac{\partial}{\partial x}(\frac{u(k+1,j)}{h})-\frac{\partial}{\partial x}(\frac{u(k,j)}{h})\<br>&amp;&#x3D;\frac{u(k+1,j)-u(k,j)}{h^2}-\frac{u(k,j)-u(k-1,j)}{h^2}\<br>&amp;&#x3D; \frac{u(k+1,j)-2u(k,j)+u(k-1,j)}{h^2}<br>\end{aligned}<br>$$<br>同理可得<br>$$<br>\frac{\partial^2u}{\partial y^2}&#x3D;\frac{u(k,j+1)-2u(k,j)+u(k,j-1)}{\tau^2}<br>$$<br>所以原方程就变为<br>$$<br>\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2}&#x3D;f(x,y)\<br>\frac{u(k+1,j)-2u(k,j)+u(k-1,j)}{h^2}+\frac{u(k,j+1)-2u(k,j)+u(k,j-1)}{\tau^2}&#x3D;f(x,y)<br>$$<br>以上的进行通过混合向前差分、向后差分的方法求二阶偏导的方法实际上就是<strong>二阶中心差分</strong></p>
+<p><img src="/%E5%B7%AE%E5%88%86%E7%AE%97%E6%B3%95.assets/image-20210728180912218.png" alt="image-20210728180912218"></p>
+<p><img src="/%E5%B7%AE%E5%88%86%E7%AE%97%E6%B3%95.assets/image-20210728180935726.png" alt="image-20210728180935726"></p>
+<h2 id="常见的差分"><a href="#常见的差分" class="headerlink" title="常见的差分"></a>常见的差分</h2><h3 id="向前差分"><a href="#向前差分" class="headerlink" title="向前差分"></a>向前差分</h3><p>函数的前向差分通常简称为函数的差分。对于函数f(x)，如果在等距节点：<br>$$<br>x_k&#x3D;x_0+kh(k&#x3D;0,1,\cdots,n)<br>$$</p>
+<p>$$<br>\Delta f(x_k)&#x3D;f(x_{k+1})-f(x_k)<br>$$</p>
+<p>则称Δf(x)，函数在每个小区间上的增量$$y(k+1)-y(k)$$为f(x)的一阶前向差分。在微积分学中的有限差分（finite differences），前向差分通常是微分在离散的函数中的等效运算。差分方程的解法也与微分方程的解法相似。当是多项式时，前向差分为Delta算子，一种线性算子。前向差分会将多项式阶数降低1</p>
+<h3 id="向后差分"><a href="#向后差分" class="headerlink" title="向后差分"></a>向后差分</h3><p>对于函数$f(x_k)$，一阶向后差分为：<br>$$<br>\Delta f(x_k)&#x3D;f(x_k)-f(x_{k-1})<br>$$</p>
+<h3 id="中心差分"><a href="#中心差分" class="headerlink" title="中心差分"></a>中心差分</h3><p>对于函数$f(x_k)$，一阶中心差分为:<br>$$<br>\Delta f(x_k)&#x3D;\frac{1}{2}(f(x_{k+1})-f(x_k))<br>$$</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>用五点菱形个格式求解Laplace方程第一边值问题<br>$$<br>\begin{cases}<br>\frac{\partial^2u}{\partial x^2}+\frac{\partial^2u}{\partial y^2}&#x3D;0,&amp;(x,y)\in \Omega\<br>u(x,y)|_{(x,y)\in \Gamma}&#x3D;\lg [(1+x)^2+y^2],&amp;\Gamma&#x3D;\partial \Omega,<br>\end{cases}<br>$$<br>其中$\Omega&#x3D;\left{ (x,y)|0 \leq x,y \leq 1 \right}$，取$h&#x3D;\tau&#x3D;\frac{1}{3}$</p>
+<p><strong>解：</strong></p>
+<p><img src="/%E5%B7%AE%E5%88%86%E7%AE%97%E6%B3%95.assets/image-20210728201425572.png" alt="image-20210728201425572"></p>
+<p>根据题意，我们画出网格出来，正好构成四个五点菱形，即得到四个方程，我们将线性方程组写出来<br>$$<br>\begin{cases}<br>\frac{1}{h^2}(u_{1,2}+u_{2,1}+u_{1,0}+u_{0,1}-4u(1,1))&#x3D;0\<br>\frac{1}{h^2}(u_{2,2}+u_{3,1}+u_{2,0}+u_{1,1}-4u(2,1))&#x3D;0\<br>\frac{1}{h^2}(u_{1,3}+u_{2,2}+u_{1,1}+u_{0,2}-4u(1,2))&#x3D;0\<br>\frac{1}{h^2}(u_{2,3}+u_{3,2}+u_{2,1}+u_{1,2}-4u(2,2))&#x3D;0<br>\end{cases}<br>$$<br>线性方程组又可以化简成<br>$$<br>\begin{bmatrix}<br>-4 &amp; 1 &amp;1 &amp;0 \<br>1 &amp; -4 &amp; 0 &amp; 1 \<br>1 &amp; 0 &amp; -4 &amp; 1\<br>0 &amp; 1 &amp; 1 &amp; -4<br>\end{bmatrix}<br>\begin{bmatrix}<br>u_{1,1}\<br>u_{1,2}\<br>u_{2,1}\<br>u_{2,2}<br>\end{bmatrix}&#x3D;-<br>\begin{bmatrix}<br>u_{1,0}+u_{0,1}\<br>u_{3,1}+u_{2,0}\<br>u_{1,3}+u_{0,2}\<br>u_{2,3}+u_{3,2}<br>\end{bmatrix}<br>$$</p>
+<p>解非齐次线性方程组求得：<br>$$<br>u_1&#x3D;0.6348,<br>u_2&#x3D;1.06,<br>u_3&#x3D;0.7985,<br>u_4&#x3D;1.1698<br>$$<br>计算的MATLAB程序如下</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line">f1 = @(x)<span class="number">2</span> * <span class="built_in">log</span>(<span class="number">1</span>+x);</span><br><span class="line">f2 = @(x)<span class="built_in">log</span>((<span class="number">1</span>+x).^<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">f3 = @(y)<span class="built_in">log</span>(<span class="number">1</span>+y.^<span class="number">2</span>);</span><br><span class="line">f4=  @(y)<span class="built_in">log</span>(<span class="number">4</span>+y.^<span class="number">2</span>);</span><br><span class="line">u=<span class="built_in">zeros</span>(<span class="number">4</span>);</span><br><span class="line">m=<span class="number">4</span>;<span class="comment">% 总列数</span></span><br><span class="line">n=<span class="number">4</span>;<span class="comment">% 总行数</span></span><br><span class="line">h=<span class="number">1</span>/<span class="number">3</span>;</span><br><span class="line">u(<span class="number">1</span>,<span class="number">1</span>:m)=feval(f3,<span class="number">0</span>:h:(m<span class="number">-1</span>)*h)&#x27;;</span><br><span class="line">u(n,<span class="number">1</span>:m)=feval(f4,<span class="number">0</span>:h:(m<span class="number">-1</span>)*h)&#x27;;</span><br><span class="line">u(<span class="number">1</span>:n,<span class="number">1</span>)=feval(f1,<span class="number">0</span>:h:(n<span class="number">-1</span>)*h);</span><br><span class="line">u(<span class="number">1</span>:n,m)=feval(f2,<span class="number">0</span>:h:(n<span class="number">-1</span>)*h);</span><br><span class="line">b = -[u(<span class="number">2</span>,<span class="number">1</span>)+u(<span class="number">1</span>,<span class="number">2</span>);u(<span class="number">4</span>,<span class="number">2</span>)+u(<span class="number">3</span>,<span class="number">1</span>);u(<span class="number">2</span>,<span class="number">4</span>)+u(<span class="number">1</span>,<span class="number">3</span>);u(<span class="number">3</span>,<span class="number">4</span>)+u(<span class="number">4</span>,<span class="number">3</span>)];</span><br><span class="line">a = [<span class="number">-4</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>;<span class="number">1</span>,<span class="number">-4</span>,<span class="number">0</span>,<span class="number">1</span>;<span class="number">1</span>,<span class="number">0</span>,<span class="number">-4</span>,<span class="number">1</span>;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">-4</span>];</span><br><span class="line">x=a\b;</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码解读</strong></p>
+<p>观察线性方程：<br>$$<br>\begin{bmatrix}<br>-4 &amp; 1 &amp;1 &amp;0 \<br>1 &amp; -4 &amp; 0 &amp; 1 \<br>1 &amp; 0 &amp; -4 &amp; 1\<br>0 &amp; 1 &amp; 1 &amp; -4<br>\end{bmatrix}<br>\begin{bmatrix}<br>u_{1,1}\<br>u_{1,2}\<br>u_{2,1}\<br>u_{2,2}<br>\end{bmatrix}&#x3D;-<br>\begin{bmatrix}<br>u_{1,0}+u_{0,1}\<br>u_{3,1}+u_{2,0}\<br>u_{1,3}+u_{0,2}\<br>u_{2,3}+u_{3,2}<br>\end{bmatrix}<br>$$<br>这个形式为最小二乘法的形式</p>
+<p>参考Matlab中的线性最小二乘的标准型：<br>$$<br>\min _A \Vert RA-Y \Vert_2^2<br>$$<br>所以我们只需要求出等式右边的式子，那么我们就可以解出等式中间的向量</p>
+<p>现在我们来解等式右边的向量，观察可知，为定义域的边界</p>
+<p>注意这里从1开始，与上式子有些不同<br>$$<br>\begin{bmatrix}<br>u_{1,1} &amp; u_{1,2} &amp; u_{1,3} &amp; u_{1,4}\<br>u_{2,1} &amp; u_{2,2} &amp; u_{2,3} &amp; u_{2,4}\<br>u_{3,1} &amp; u_{3,2} &amp; u_{3,3} &amp; u_{3,4}\<br>u_{4,1} &amp; u_{4,2} &amp; u_{4,3} &amp; u_{4,4}<br>\end{bmatrix}<br>$$<br>因此我们只需要解出边界的值，就可以把b表示出来</p>
+</article>
+                        </main>
+                        
+                        
+                        
+                    </div>
+                </div>
+                <div class="row mt-5 mb-5">
+                    <div class="col-12">
+                        <div class="row">
+    <div class="col">
+        <nav aria-label="paginator" class="paginator">
+            <ul class="pagination d-none d-md-flex pagination-lg justify-content-center">
+                <li class="page-item  disabled ">
+                    <a class="page-link"
+                        href=""
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            No more</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item  disabled ">
+                    <a class="page-link"
+                        href=""
+                        aria-label="Next">
+                        <span
+                            aria-hidden="true">No more
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="pagination d-md-none justify-content-center">
+                <li class="page-item  disabled ">
+                    <a class="page-link"
+                        href=""
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;
+                            No more</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item  disabled ">
+                    <a class="page-link"
+                        href=""
+                        aria-label="Next">
+                        <span
+                            aria-hidden="true">No more
+                            &raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="vcomment"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="container pt-4 page-sidebar">
+                    
+                    <div class="row">
+    <div class="col">
+        <h6>APPLAUSE FOR ME</h6>
+        <div id="applause-easy"></div>
+    </div>
+</div>
+                    
+                    <hr class="row">
+                    <div class="row toc-container">
+                        <div class="col-12">
+                            <h6>NAVIGATION</h6>
+                            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E7%AE%97%E6%B3%95-%E6%B1%82%E8%A7%A3%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-text">差分算法(求解偏微分方程)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="toc-text">算法详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B7%AE%E5%88%86"><span class="toc-text">常见的差分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E5%89%8D%E5%B7%AE%E5%88%86"><span class="toc-text">向前差分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E5%90%8E%E5%B7%AE%E5%88%86"><span class="toc-text">向后差分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E5%B7%AE%E5%88%86"><span class="toc-text">中心差分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-text">例题</span></a></li></ol></li></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    <div class="jumbotron jumbotron-fluid mb-0">
+        <div class="container-fluid">
+            <div class="col text-center">
+                <div class="bottom-social">
+                    <div class="row">
+    <div class="col text-center">
+        <ul class="list-inline">
+            
+            <li class="list-inline-item">
+                
+                <a target="_blank" rel="noopener" href="https://github.com/chrisng2008">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+            <li class="list-inline-item">
+                
+                <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/chris-72-5">
+                    <span class="fa-stack fa-2x icon-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-zhihu fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+                </div>
+                <p class="copyright text-muted">
+                    Copyright &copy; 
+                    <br>
+                    Theme: <a target="_blank" rel="noopener" href="https://github.com/Hanlin-Dong/hexo-theme-adagio">Adagio</a> - A <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> theme made with love by <a target="_blank" rel="noopener" href="http://www.hanlindong.com">Hanlin Dong</a>.
+                    <br>
+                    Thanks for coming!
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.9.0/js/all.min.js"></script>
+     
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.13.11/katex.min.js"></script>
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+
+
+
+<script src="/js/av.min.js"></script>
+
+
+<script src="/js/valine.min.js"></script>
+
+
+<script src="/js/applause-easy.js"></script>
+
+<script>
+$(document).ready(function() {
+    new ApplauseEasy({
+        id: 'applause-easy',
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        img_src: "/img/clap.png",
+        img_width: "50px",
+        img_height: "50px",
+        trigger_every: 20,
+        trigger_fun: () => {alert("Thanks!");}
+    })
+})
+</script>
+
+<script src="/js/adagio.js"></script>
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?123456789";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-11111111-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-11111111-1');
+</script>
+
+
+    
+    <script>
+    new Valine({
+        el: "#vcomment",
+        appId: "xxxxxxxxxx",
+        appKey: "xxxxxxxxxx",
+        notify: false,
+        varify: false,
+        avatar: 'identicon',
+        placeholder: "",
+        recordIP: true
+    })
+</script>
+    
+</body>
+</html>

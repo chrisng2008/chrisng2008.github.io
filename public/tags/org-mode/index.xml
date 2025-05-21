@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Org-Mode on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/tags/org-mode/</link>
+    <description>Recent content in Org-Mode on Even - A super concise theme for Hugo</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 21 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/org-mode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用Ox-hugo来写博客</title>
+      <link>http://localhost:1313/post/blog-with-ox-hugo/</link>
+      <pubDate>Wed, 21 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/blog-with-ox-hugo/</guid>
+      <description>&lt;p&gt;还记得大四准备考研的时候，收听了一档播客叫 &lt;code&gt;Emacs Talk&lt;/code&gt; ，听了里面的一些大牛分享他们的经历，受到了很多感触。尤其是听到经济学博士Kathy的有趣经历后，开始学习了 &lt;code&gt;Emacs&lt;/code&gt; 之路。在Emcas Talk的推荐下，开始跟着子龙老师学习Emcas，但是学习了一段时间后，发现Emacs在Windwos上的性能实在是太差了，于是渐渐就放弃了这个工具。直到我最近换了一台Mac Mini后，使用了Unix系统，重新开始学习Emacs。我现在是Win和Mac双持，为了让 &lt;code&gt;Emacs&lt;/code&gt; 能够成为我的生产力工具，我也探索出了在Windows平台使用Emacs的更好方法，就是在Wsl下使用Emacs，并使用Git进行多平台同步。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

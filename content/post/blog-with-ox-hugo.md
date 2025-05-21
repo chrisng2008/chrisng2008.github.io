@@ -124,7 +124,7 @@ See `org-capture-templates' for more information."
 如果跟着上面的步骤，在Emacs下输入 `M+x org-capture`
 ![](/ox-hugo/2.png)
 
-{{< figure src="content/figure/blogs_with_ox_hugo/3.png" >}}
+{{< figure src="/ox-hugo/3.png" >}}
 
 在输入文字后，保存，即可自动生成markdown文件的博客。
 

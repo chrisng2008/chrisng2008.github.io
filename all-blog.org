@@ -107,11 +107,10 @@ See `org-capture-templates' for more information."
 如果跟着上面的步骤，在Emacs下输入 ~M+x org-capture~
 [[file:content/figure/blog_with_ox_hugo/2.png]]
 
-[[file:content/figure/blogs_with_ox_hugo/3.png]]
+[[file:content/figure/blog_with_ox_hugo/3.png]]
 
 在输入文字后，保存，即可自动生成markdown文件的博客。
 
 需要注意的是，ox-hugo中的博客是以 ~to do~ 的形式来判断是否为草稿文件。
 + ~TODO~ ：代表未发布的文章，在生产Markdown的元数据中， ~draft=true~ ，只有在 ~hugo server -D~ 在会显示该文章。
 + ~DONE~ ：代表已完成的文章， ~DONE Date~ 会被作为发表的时间戳，当然也可以自己指定，具体请参考 [[https://ox-hugo.scripter.co/doc/org-meta-data-to-hugo-front-matter/][Org meta-data to Hugo front-matter]]
-

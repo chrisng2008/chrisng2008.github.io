@@ -14,14 +14,7 @@ author = "Chris Ng"
 
 网上已经有大牛写好了一个脚本，我们直接下载就行了，具体请参考 <https://github.com/juewuy/ShellCrash/tree/dev>
 
-运行中根据指引进行安装即可，也可以自定义安装路径，本教程统一将clash安装在家目录中
-
-```shell
-cd ~
-mkdir clash
-```
-
-接下来，在终端中
+运行中根据指引进行安装即可
 
 ```shell
 sudo -i #切换到root用户，如果需要密码，请输入密码

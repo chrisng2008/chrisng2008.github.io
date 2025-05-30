@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linux服务器代理 (Web UI) - Chris &#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Chris Ng" /><meta name="description" content="在服务器中，难免会遇到一些访问外网的需求。如果轻量使用的话，可以使用端口转发的方式，使用本地的代理，但是肯定会有些麻烦。因此，我经过一番搜索，找到了一个在服务器中能够轻松使用的代理，并且能够使用Web来切换节点，避免了远程连接没有ui的尴尬。
+" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.147.3 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86-web-ui/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:url" content="http://localhost:1313/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86-web-ui/">
+  <meta property="og:site_name" content="Chris &#39;s Blog">
+  <meta property="og:title" content="Linux服务器代理 (Web UI)">
+  <meta property="og:description" content="在服务器中，难免会遇到一些访问外网的需求。如果轻量使用的话，可以使用端口转发的方式，使用本地的代理，但是肯定会有些麻烦。因此，我经过一番搜索，找到了一个在服务器中能够轻松使用的代理，并且能够使用Web来切换节点，避免了远程连接没有ui的尴尬。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-05-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-05-30T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Clash">
+
+  <meta itemprop="name" content="Linux服务器代理 (Web UI)">
+  <meta itemprop="description" content="在服务器中，难免会遇到一些访问外网的需求。如果轻量使用的话，可以使用端口转发的方式，使用本地的代理，但是肯定会有些麻烦。因此，我经过一番搜索，找到了一个在服务器中能够轻松使用的代理，并且能够使用Web来切换节点，避免了远程连接没有ui的尴尬。">
+  <meta itemprop="datePublished" content="2025-05-30T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2025-05-30T00:00:00+00:00">
+  <meta itemprop="wordCount" content="759">
+  <meta itemprop="keywords" content="Linux,Clash">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linux服务器代理 (Web UI)">
+  <meta name="twitter:description" content="在服务器中，难免会遇到一些访问外网的需求。如果轻量使用的话，可以使用端口转发的方式，使用本地的代理，但是肯定会有些麻烦。因此，我经过一番搜索，找到了一个在服务器中能够轻松使用的代理，并且能够使用Web来切换节点，避免了远程连接没有ui的尴尬。">
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Chris&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Chris&#39;s Blog</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux服务器代理 (Web UI)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2025-05-30 </span>
+        <div class="post-category">
+            <a href="/categories/linux/"> Linux </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装-crash">安装 Crash</a></li>
+        <li><a href="#配置-crash">配置 crash</a></li>
+        <li><a href="#订阅链接获取">订阅链接获取</a>
+          <ul>
+            <li><a href="#生成-config-dot-yaml-文件">生成 <code>config.yaml</code> 文件</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在服务器中，难免会遇到一些访问外网的需求。如果轻量使用的话，可以使用端口转发的方式，使用本地的代理，但是肯定会有些麻烦。因此，我经过一番搜索，找到了一个在服务器中能够轻松使用的代理，并且能够使用Web来切换节点，避免了远程连接没有ui的尴尬。</p>
+<h2 id="安装-crash">安装 Crash</h2>
+<p>网上已经有大牛写好了一个脚本，我们直接下载就行了，具体请参考 <a href="https://github.com/juewuy/ShellCrash/tree/dev">https://github.com/juewuy/ShellCrash/tree/dev</a></p>
+<p>运行中根据指引进行安装即可，也可以自定义安装路径，本教程统一将clash安装在家目录中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> ~
+</span></span><span class="line"><span class="cl">mkdir clash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来，在终端中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo -i <span class="c1">#切换到root用户，如果需要密码，请输入密码</span>
+</span></span><span class="line"><span class="cl">bash <span class="c1">#如已处于bash环境可跳过</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">url</span><span class="o">=</span><span class="s1">&#39;https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master&#39;</span> <span class="o">&amp;&amp;</span> wget -q --no-check-certificate -O /tmp/install.sh <span class="nv">$url</span>/install.sh  <span class="o">&amp;&amp;</span> bash /tmp/install.sh <span class="o">&amp;&amp;</span> <span class="nb">source</span> /etc/profile <span class="p">&amp;</span>&gt; /dev/null
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果失败，请更换别的源进行下载，具体参考上面给出的链接，写的非常详细！
+接下来，按照指令进行安装：</p>
+<figure><img src="/ox-hugo/install_1.png">
+</figure>
+
+<figure><img src="/ox-hugo/install_2.png">
+</figure>
+
+<h2 id="配置-crash">配置 crash</h2>
+<p>目前应该为 <code>root</code> 用户，我们可以直接在当前用户下输入 <code>crash</code> 直接进行进入配置，或者是退出当前账户切换到不同用户后执行，但是注意需要使用 <code>sudo</code> ，否则会报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 管理员用户下</span>
+</span></span><span class="line"><span class="cl">crash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 普通用户下</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 管理员用户下，输入 exit 可切换为普通用户</span>
+</span></span><span class="line"><span class="cl">sudo crash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进入脚本后，安装指令选择就好了，最后我们选择 <strong>导入本地配置文件</strong> ，需要记住存放本地配置文件的目录 <code>/tmp</code></p>
+<figure><img src="/ox-hugo/1.png">
+</figure>
+
+<figure><img src="/ox-hugo/2.png">
+</figure>
+
+<figure><img src="/ox-hugo/3.png">
+</figure>
+
+<h2 id="订阅链接获取">订阅链接获取</h2>
+<h3 id="生成-config-dot-yaml-文件">生成 <code>config.yaml</code> 文件</h3>
+<p>我们使用的订阅链接通常为机场的订阅链接，因此，我们需要借助机场的订阅链接来获取配置文件，获取订阅链接有三种方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 方法 1</span>
+</span></span><span class="line"><span class="cl">sudo wget -O ./config.yaml <span class="o">[</span>机场订阅链接<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 方法 2</span>
+</span></span><span class="line"><span class="cl">sudo curl -o ./config.yaml <span class="o">[</span>机场订阅链接<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 方法 3</span>
+</span></span><span class="line"><span class="cl">sudo curl <span class="o">[</span>机场订阅链接<span class="o">]</span> &gt;./config.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>理论上来说，输入以上其中一条路径后，会在当前路径生成一个 <code>config.yaml</code> 配置文件，我们需要将其拷贝到刚才我们记录的路径</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo cp ./config.yaml /tmp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在命令行中重新启动 <code>crash</code> 即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo crash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><img src="/ox-hugo/4.png">
+</figure>
+
+<p>加载配置后，按照指令输入 <code>1</code> 即可启动，然后按 <code>ctrl</code> 或者 <code>command</code> 然后鼠标点击链接即可查看节点的信息，通常来说，选择第三个即可。</p>
+<figure><img src="/ox-hugo/5.png">
+</figure>
+
+<p>进入页面后，和Windows上clash的界面基本差不多。</p>
+<figure><img src="/ox-hugo/6.png">
+</figure>
+
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Chris Ng</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2025-05-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          <a href="/tags/clash/">Clash</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/mkc%E5%B0%8F%E5%88%86%E9%98%9F%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%89%8D%E5%BE%80%E9%85%92%E5%90%A7%E8%AE%B0%E5%BD%95/">
+            <span class="next-text nav-default">酒吧的最后一夜</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="chrisng2008@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://x.com/ChrisNg769261" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://www.facebook.com/profile.php?id=100083762033288" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="https://www.google.com/" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/chrisng2008" class="iconfont icon-github" title="github"></a>
+      <a href="https://space.bilibili.com/233895773?spm_id_from=333.1007.0.0" class="iconfont icon-bilibili" title="bilibili"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

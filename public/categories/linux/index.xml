@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Chris &#39;s Blog</title>
+    <link>http://localhost:1313/categories/linux/</link>
+    <description>Recent content in Linux on Chris &#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 30 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux服务器代理 (Web UI)</title>
+      <link>http://localhost:1313/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86-web-ui/</link>
+      <pubDate>Fri, 30 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86-web-ui/</guid>
+      <description>&lt;p&gt;在服务器中，难免会遇到一些访问外网的需求。如果轻量使用的话，可以使用端口转发的方式，使用本地的代理，但是肯定会有些麻烦。因此，我经过一番搜索，找到了一个在服务器中能够轻松使用的代理，并且能够使用Web来切换节点，避免了远程连接没有ui的尴尬。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

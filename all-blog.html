@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-05-31 Sat 22:06 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org59fb42f">1. Blog Ideas</a>
+<ul>
+<li><a href="#org702e486">1.1. <span class="done DONE">DONE</span> 使用Ox-hugo来写博客&#xa0;&#xa0;&#xa0;<span class="tag"><span class="org_mode">org_mode</span>&#xa0;<span class="hugo">hugo</span>&#xa0;<span class="emacs">emacs</span>&#xa0;<span class="ox_hugo">ox_hugo</span></span></a>
+<ul>
+<li><a href="#org477918b">1.1.1. 安装Hugo</a></li>
+</ul>
+</li>
+<li><a href="#orgca55985">1.2. <span class="todo TODO">TODO</span> 酒吧的最后一夜</a></li>
+<li><a href="#org56dff90">1.3. <span class="done DONE">DONE</span> Linux服务器代理 (Web UI)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Linux">Linux</span>&#xa0;<span class="Clash">Clash</span></span></a>
+<ul>
+<li><a href="#orga623ed5">1.3.1. 安装 Crash</a></li>
+<li><a href="#org6d9eb44">1.3.2. 配置 crash</a></li>
+<li><a href="#org51f71f5">1.3.3. 订阅链接获取</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+#+hugo<sub>code</sub> fence: nil
+</p>
+<div id="outline-container-org59fb42f" class="outline-2">
+<h2 id="org59fb42f"><span class="section-number-2">1.</span> Blog Ideas</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org702e486" class="outline-3">
+<h3 id="org702e486"><span class="section-number-3">1.1.</span> <span class="done DONE">DONE</span> 使用Ox-hugo来写博客&#xa0;&#xa0;&#xa0;<span class="tag"><span class="org_mode">org_mode</span>&#xa0;<span class="hugo">hugo</span>&#xa0;<span class="emacs">emacs</span>&#xa0;<span class="ox_hugo">ox_hugo</span></span></h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+还记得大四准备考研的时候，收听了一档播客叫 <code>Emacs Talk</code> ，听了里面的一些大牛分享他们的经历，受到了很多感触。尤其是听到经济学博士Kathy的有趣经历后，开始学习了 <code>Emacs</code> 之路。在Emcas Talk的推荐下，开始跟着子龙老师学习Emcas，但是学习了一段时间后，发现Emacs在Windwos上的性能实在是太差了，于是渐渐就放弃了这个工具。直到我最近换了一台Mac Mini后，使用了Unix系统，重新开始学习Emacs。我现在是Win和Mac双持，为了让 <code>Emacs</code> 能够成为我的生产力工具，我也探索出了在Windows平台使用Emacs的更好方法，就是在Wsl下使用Emacs，并使用Git进行多平台同步。
+</p>
+</div>
+<div id="outline-container-org477918b" class="outline-4">
+<h4 id="org477918b"><span class="section-number-4">1.1.1.</span> 安装Hugo</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+在Mac下通常使用包管理器 <code>brew</code> 来安装，在终端运行以下的命令即可。
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">brew install hugo
+</pre>
+</div>
+
+<p>
+在Arch Linux环境下，通常使用包管理器 <code>pacman</code> 来进行安装，在终端下运行以下的命令
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">sudo pacman -S hugo
+</pre>
+</div>
+
+<p>
+安装完后，可以在终端输入以下的命令来查看是否正确安装。
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">hugo version
+</pre>
+</div>
+</div>
+<ol class="org-ol">
+<li><a id="org669e9f4"></a>新建博客站点<br />
+<div class="outline-text-5" id="text-1-1-1-1">
+<p>
+首先进入一个你存放文件的路径，然后输入以下的命令
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">hugo new site blog
+cd blog
+git init
+git add .
+git commit -m "first commit"
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org3a0eb14"></a>安装hugo主题Even<br />
+<div class="outline-text-5" id="text-1-1-1-2">
+<p>
+在当前的git下添加git模块
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">git submodule add https://github.com/olOwOlo/hugo-theme-even themes/even
+</pre>
+</div>
+<p>
+将 <code>hugo-blog/themes/even/exampleSite/config.toml</code> 复制到站点的根目录下，替换根目录下的配置文件。
+在博客根目录下运行以下的终端命令即可
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">hugo server
+</pre>
+</div>
+
+<p>
+然而，在我的实际测试中，发现因为版本原因报错，原本的 <code>config.toml</code> 需要进行修改
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"># paginate = 5
+pagination.paperSize = 5
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org1480087"></a>使用 Org mode 来写博客<br />
+<div class="outline-text-5" id="text-1-1-1-3">
+<p>
+首先安装 <code>ox-hugo</code> 模块，在emacs的配置文件中加入以下配置
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package ox-hugo
+  :ensure t   ;Auto-install the package from Melpa
+  :pin melpa  ;`package-archives' should already have ("melpa" . "https://melpa.org/packages/")
+  :after ox)
+</pre>
+</div>
+
+<p>
+这里按照ox-hugo的推荐，使用一个org文件进行写博客，每一个org subtree 对应一篇博客，org文件需要提前创建。
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(with-eval-after-load 'org-capture
+  (defun org-hugo-new-subtree-post-capture-template ()
+    "Returns `org-capture' template string for new Hugo post.
+See `org-capture-templates' for more information."
+    (let* ((title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
+           (fname (org-hugo-slug title)))
+      (mapconcat #'identity
+                 `(
+                   ,(concat "* TODO " title)
+                   ":PROPERTIES:"
+                   ,(concat ":EXPORT_FILE_NAME: " fname)
+                   ":END:"
+                   "\n\n")          ;Place the cursor here finally
+                 "\n")))
+
+  (add-to-list 'org-capture-templates
+               '("h"                ;`org-capture' binding + h
+                 "Hugo post"
+                 entry
+                 ;; It is assumed that below file is present in `org-directory'
+                 ;; and that it has a "Blog Ideas" heading. It can even be a
+                 ;; symlink pointing to the actual location of all-posts.org!
+                 (file+headline "~/blog/all-blog.org" "Blog Ideas")
+                 (function org-hugo-new-subtree-post-capture-template))))
+</pre>
+</div>
+
+<p>
+在blog根目录下创建文件， <code>.dir-locals.el</code> ，内容如下。这个文件的作用是我们后续在修改org文件的时候，都会自动生成markdown文件。
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">((org-mode . ((eval . (org-hugo-auto-export-mode)))))
+</pre>
+</div>
+<p>
+需要在 <code>all-blog.org</code> 文件中加入以下的配置
+</p>
+
+<div id="org268edeb" class="figure">
+<p><img src="content/figure/blog_with_ox_hugo/1.png" alt="1.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>all-org.org 配置</p>
+</div>
+</div>
+</li>
+<li><a id="org3b5e165"></a>创建你的第一篇博客<br />
+<div class="outline-text-5" id="text-1-1-1-4">
+<p>
+如果跟着上面的步骤，在Emacs下输入 <code>M+x org-capture</code>
+<img src="content/figure/blog_with_ox_hugo/2.png" alt="2.png" />
+</p>
+
+
+<div id="org60889cc" class="figure">
+<p><img src="content/figure/blog_with_ox_hugo/3.png" alt="3.png" />
+</p>
+</div>
+
+<p>
+在输入文字后，保存，即可自动生成markdown文件的博客。
+</p>
+
+<p>
+需要注意的是，ox-hugo中的博客是以 <code>to do</code> 的形式来判断是否为草稿文件。
+</p>
+<ul class="org-ul">
+<li><code>TODO</code> ：代表未发布的文章，在生产Markdown的元数据中， <code>draft=true</code> ，只有在 <code>hugo server -D</code> 在会显示该文章。</li>
+<li><code>DONE</code> ：代表已完成的文章， <code>DONE Date</code> 会被作为发表的时间戳，当然也可以自己指定，具体请参考 <a href="https://ox-hugo.scripter.co/doc/org-meta-data-to-hugo-front-matter/">Org meta-data to Hugo front-matter</a></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgca55985" class="outline-3">
+<h3 id="orgca55985"><span class="section-number-3">1.2.</span> <span class="todo TODO">TODO</span> 酒吧的最后一夜</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+2025年5月23日，完成汇报的我，如释重负。一人前往南亭吃饭，健身，结束时，想着要不到 TapTap 酒馆小酌一杯吧。这也不算是临时主意，前几天夜里便有打算，但是碍于麻烦，便搁置到那天。正好趁着周五结束汇报，无事一身轻松，小酌一杯也是个不错的选择。
+</p>
+
+<p>
+于是，我独自一人来到期待已久的TapTap，刚开始还惶恐，我一个人进去喝酒会不会有点奇怪，但是都走到门口了，就进去看看吧。和以往不同的是，这一次就酒吧只有我一个人。依稀记得上次我到酒吧喝酒，是和didi、洛瑶一起，已经过去三四年了吧。上次去我们仨到北京路的一家酒吧，已经不记得名字了，只记得那位老板很健谈，与我们是老乡都是中山仔，调的酒很好喝，那天大家属于高考后的第一次相聚，谈得甚欢，最后卡着地铁末班车回去。那是我第一次和鸡尾酒，第二次是和杰前往深圳参加发达星期四的年会，但那次，严格上不属于酒吧。
+</p>
+
+
+<div id="orgf43b50a" class="figure">
+<p><img src="content/figure/酒馆最后一夜/1.jpg" alt="1.jpg" />
+</p>
+<p><span class="figure-number">Figure 2: </span>2022年六月：纪中三人组前往北京路酒馆喝酒</p>
+</div>
+
+<p>
+回归正题，碍于我一个人来酒馆，外面的小桌子坐着来聚会的学生们，与我格格不入。我坐在了窗台，点了杯9.9的荔枝笑尝尝。9.9的鸡尾酒，至今还没喝过这么便宜的，味道还算是凑合，有点可惜就是酒不是现调的，老板似乎也不太讲话，默默在吧台备餐，这不是我所期待的。喝完后，我又点了一杯长岛冰茶，这是我第一次喝这传闻中的“长岛冰茶”。长岛冰茶，这个名字，第一次是从杨千嬅的《可惜我是水瓶座》中了解到的，“拿来长岛冰茶换我半晚安睡”，后面的日子里，我对长岛冰茶也略有耳闻，第一次与didi去酒吧的时候，就想试试这杯传说中的长岛冰茶，可是当时担心还得回宿舍，喝醉了比较麻烦，当时当时手头也比较窘迫，点了杯更加便宜的鸡尾酒，当然，也不便宜，印象中也差不多百来块一杯，然而，已经那杯酒具体叫什么早已不记得，希望下次有机会故地重游吧。
+</p>
+
+<p>
+这杯长岛冰茶，颜色似乎和我想象的有点差距，颜色不够深。初尝，意外地好喝，明知道由各种烈酒和可乐勾兑得来，酸甜又不会覆盖那点酒味，既有酒精的浓郁，又能尝到清爽的果酸。不愧是传闻中的失身酒，仅仅一杯，便足以令我兴奋。
+</p>
+
+
+<div id="org68f0a60" class="figure">
+<p><img src="content/figure/酒馆最后一夜/taptap1.jpg" alt="taptap1.jpg" />
+</p>
+<p><span class="figure-number">Figure 3: </span>荔枝笑</p>
+</div>
+
+
+<div id="orgd78f222" class="figure">
+<p><img src="content/figure/酒馆最后一夜/taptap2.jpg" alt="taptap2.jpg" />
+</p>
+<p><span class="figure-number">Figure 4: </span>长岛冰茶</p>
+</div>
+
+<p>
+正巧当时佳哥在附近吃宵夜，于是和聪哥边过来陪我一起喝酒。随后，洋哥和于哥也过来了，由于这边的酒价格昂贵，于是一拍即合，前往广大商中的夜猫酒馆喝个够。我们便会宿舍洗漱，于是，佳哥、聪哥、洋哥、于哥、逸哥和我组成六人组，正式前往夜猫酒馆大干一场。这是我第一次前往真正意义上的酒吧，和颇有文青气质的北京路酒吧不同，这里灯光闪烁，夹杂着说唱音乐，坐满了来这里喝酒的学生们。我们找个位置坐下，用美团点了两个套餐，很快，酒来了，正式开启这令人沉迷的一夜。
+</p>
+
+<p>
+于哥给我递了根烟，这应该是我第三次抽烟，还是有点生疏。我对抽烟🚬不反感，偶尔抽一次，不上瘾就没什么问题，平时也是出去玩偶尔抽一根。
+</p>
+
+
+<div id="orgdaabc1b" class="figure">
+<p><img src="content/figure/酒馆最后一夜/2.jpg" alt="2.jpg" />
+</p>
+<p><span class="figure-number">Figure 5: </span>学着大人的样子抽烟</p>
+</div>
+
+<p>
+酒上齐后，我们便开始玩游戏。我初以为来酒吧就是来喝酒，原来是得配合游戏的，大话🎲，小姐牌。这些游戏，好久没有玩过，有些生疏，不过很快就回忆起了游戏规则。来到这里喝酒的同学们，不知道你们是否跟我一样生活充满着压力呢？这里霓虹闪烁，夹杂着嘈杂的音乐，在这里，可以卸下生活的伪装，在酒精的加持下，可以彻底地放飞自我。说真的，好久没有这么疯狂过，可以和隔壁桌的女生敬酒聊天，可以抱着酒桶到处乱跑，在这里，没有任何的规则，只要玩的尽兴。
+</p>
+
+
+<div id="orgbab7cee" class="figure">
+<p><img src="content/figure/酒馆最后一夜/3.jpg" alt="3.jpg" />
+</p>
+<p><span class="figure-number">Figure 6: </span>玩游戏时候的我们 1</p>
+</div>
+
+
+<div id="org23c8857" class="figure">
+<p><img src="content/figure/酒馆最后一夜/4.jpg" alt="4.jpg" />
+</p>
+<p><span class="figure-number">Figure 7: </span>玩游戏时候的我们 2</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org56dff90" class="outline-3">
+<h3 id="org56dff90"><span class="section-number-3">1.3.</span> <span class="done DONE">DONE</span> Linux服务器代理 (Web UI)&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Linux">Linux</span>&#xa0;<span class="Clash">Clash</span></span></h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+在服务器中，难免会遇到一些访问外网的需求。如果轻量使用的话，可以使用端口转发的方式，使用本地的代理，但是肯定会有些麻烦。因此，我经过一番搜索，找到了一个在服务器中能够轻松使用的代理，并且能够使用Web来切换节点，避免了远程连接没有ui的尴尬。
+</p>
+</div>
+<div id="outline-container-orga623ed5" class="outline-4">
+<h4 id="orga623ed5"><span class="section-number-4">1.3.1.</span> 安装 Crash</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+网上已经有大牛写好了一个脚本，我们直接下载就行了，具体请参考 <a href="eww:https://github.com/juewuy/ShellCrash/tree/dev">eww:https://github.com/juewuy/ShellCrash/tree/dev</a>
+</p>
+
+<p>
+运行中根据指引进行安装即可
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-shell">sudo -i #切换到root用户，如果需要密码，请输入密码
+bash #如已处于bash环境可跳过
+export url='https://fastly.jsdelivr.net/gh/juewuy/ShellCrash@master' &amp;&amp; wget -q --no-check-certificate -O /tmp/install.sh $url/install.sh  &amp;&amp; bash /tmp/install.sh &amp;&amp; source /etc/profile &amp;&gt; /dev/null
+</pre>
+</div>
+<p>
+如果失败，请更换别的源进行下载，具体参考上面给出的链接，写的非常详细！
+接下来，按照指令进行安装：
+</p>
+
+
+<div id="org08285ac" class="figure">
+<p><img src="content/figure/clash/install_1.png" alt="install_1.png" />
+</p>
+</div>
+
+
+<div id="org4f5dbdf" class="figure">
+<p><img src="content/figure/clash/install_2.png" alt="install_2.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org6d9eb44" class="outline-4">
+<h4 id="org6d9eb44"><span class="section-number-4">1.3.2.</span> 配置 crash</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+目前应该为 <code>root</code> 用户，我们可以直接在当前用户下输入 <code>crash</code> 直接进行进入配置，或者是退出当前账户切换到不同用户后执行，但是注意需要使用 <code>sudo</code> ，否则会报错
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"># 管理员用户下
+crash
+
+# 普通用户下
+# 管理员用户下，输入 exit 可切换为普通用户
+sudo crash
+</pre>
+</div>
+
+<p>
+进入脚本后，安装指令选择就好了，最后我们选择 <b>导入本地配置文件</b> ，需要记住存放本地配置文件的目录 <code>/tmp</code>
+</p>
+
+
+<div id="org820a3b2" class="figure">
+<p><img src="content/figure/clash/1.png" alt="1.png" />
+</p>
+</div>
+
+
+<div id="org3251542" class="figure">
+<p><img src="content/figure/clash/2.png" alt="2.png" />
+</p>
+</div>
+
+
+<div id="orgee1919d" class="figure">
+<p><img src="content/figure/clash/3.png" alt="3.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org51f71f5" class="outline-4">
+<h4 id="org51f71f5"><span class="section-number-4">1.3.3.</span> 订阅链接获取</h4>
+<div class="outline-text-4" id="text-1-3-3">
+</div>
+<ol class="org-ol">
+<li><a id="org2a7feaa"></a>生成 <code>config.yaml</code> 文件<br />
+<div class="outline-text-5" id="text-1-3-3-1">
+<p>
+我们使用的订阅链接通常为机场的订阅链接，因此，我们需要借助机场的订阅链接来获取配置文件，获取订阅链接有三种方法
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"># 方法 1
+sudo wget -O ./config.yaml [机场订阅链接]
+
+# 方法 2
+sudo curl -o ./config.yaml [机场订阅链接]
+
+# 方法 3
+sudo curl [机场订阅链接] &gt;./config.yaml
+</pre>
+</div>
+
+<p>
+理论上来说，输入以上其中一条路径后，会在当前路径生成一个 <code>config.yaml</code> 配置文件，我们需要将其拷贝到刚才我们记录的路径
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">sudo cp ./config.yaml /tmp
+</pre>
+</div>
+
+<p>
+然后在命令行中重新启动 <code>crash</code> 即可
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">sudo crash
+</pre>
+</div>
+
+
+<div id="orgdfec128" class="figure">
+<p><img src="content/figure/clash/4.png" alt="4.png" />
+</p>
+</div>
+
+<p>
+加载配置后，按照指令输入 <code>1</code> 即可启动，然后按 <code>ctrl</code> 或者 <code>command</code> 然后鼠标点击链接即可查看节点的信息，通常来说，选择第三个即可。
+</p>
+
+
+<div id="org6985e66" class="figure">
+<p><img src="content/figure/clash/5.png" alt="5.png" />
+</p>
+</div>
+
+<p>
+进入页面后，和Windows上clash的界面基本差不多。
+</p>
+
+
+<div id="orgcf6403c" class="figure">
+<p><img src="content/figure/clash/6.png" alt="6.png" />
+</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2025-05-31 Sat 22:06</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -6,8 +6,15 @@
     <description>Recent content in Org-Mode on Chris &#39;s Blog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 21 May 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Jun 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/org-mode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>orgmode 显示数学公式</title>
+      <link>http://localhost:1313/post/orgmode-%E6%98%BE%E7%A4%BA%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/</link>
+      <pubDate>Fri, 06 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/orgmode-%E6%98%BE%E7%A4%BA%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/</guid>
+      <description>&lt;p&gt;在使用Emacs前习惯使用Markdown来记笔记，使用Typora所见即所得的方式，又或者是使用Vscode的preview插件来实时查看数学公式，但是切换到Emacs的Org Mode后，显示数学公式似乎很困难，经过我的探索，总结出了几个比较好用的 &lt;code&gt;Org Mode&lt;/code&gt; 显示数学公式的方式&lt;/p&gt;</description>
+    </item>
     <item>
       <title>使用Ox-hugo来写博客</title>
       <link>http://localhost:1313/post/blog-with-ox-hugo/</link>

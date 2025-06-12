@@ -3,14 +3,35 @@
   
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2025-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2025-06-06T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-08T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/life/</loc>
+    <lastmod>2025-06-08T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2025-06-08T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/%E5%A4%9C%E7%88%AC%E7%99%BD%E4%BA%91%E5%B1%B1/</loc>
+    <lastmod>2025-06-08T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -51,13 +72,6 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2025-06-06T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-06-06T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -88,13 +102,6 @@
   <url>
     <loc>http://localhost:1313/post/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A3%E7%90%86-web-ui/</loc>
     <lastmod>2025-05-30T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/categories/life/</loc>
-    <lastmod>2025-05-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

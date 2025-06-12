@@ -308,53 +308,53 @@ npm install mathjax-full
 在 ~mathjax-converter~ 目录下创建 ~convert.js~ 文件，并复制以下的内容进去。
 
 #+BEGIN_SRC js
-// 导入 MathJax v3 的核心组件
-const { mathjax } = require('mathjax-full/js/mathjax.js');
-const { TeX } = require('mathjax-full/js/input/tex.js');
-const { SVG } = require('mathjax-full/js/output/svg.js');
-const { liteAdaptor } = require('mathjax-full/js/adaptors/liteAdaptor.js');
-const { RegisterHTMLHandler } = require('mathjax-full/js/handlers/html.js');
+  // 导入 MathJax v3 的核心组件
+  const { mathjax } = require('mathjax-full/js/mathjax.js');
+  const { TeX } = require('mathjax-full/js/input/tex.js');
+  const { SVG } = require('mathjax-full/js/output/svg.js');
+  const { liteAdaptor } = require('mathjax-full/js/adaptors/liteAdaptor.js');
+  const { RegisterHTMLHandler } = require('mathjax-full/js/handlers/html.js');
+  
+  // 初始化转换环境
+  const adaptor = liteAdaptor();
+  RegisterHTMLHandler(adaptor);
 
-// 初始化转换环境
-const adaptor = liteAdaptor();
-RegisterHTMLHandler(adaptor);
+  const tex = new TeX({ packages: require('mathjax-full/js/input/tex/AllPackages.js').AllPackages });
+  const svg = new SVG({ fontCache: 'none' }); // 'none' 表示不缓存字体，更适合命令行一次性使用
 
-const tex = new TeX({ packages: require('mathjax-full/js/input/tex/AllPackages.js').AllPackages });
-const svg = new SVG({ fontCache: 'none' }); // 'none' 表示不缓存字体，更适合命令行一次性使用
+  // 创建一个异步函数来执行转换
+  async function texToSvg(texInput) {
+      const math = await mathjax.document('', {
+          InputJax: tex,
+          OutputJax: svg
+      });
+      
+      // 将 TeX 转换为 SVG
+      const node = math.convert(texInput, {
+          display: true, // true 表示显示模式 (display style), false 表示行内模式 (inline style)
+          em: 16,
+          ex: 8,
+          containerWidth: 80 * 16
+      });
 
-// 创建一个异步函数来执行转换
-async function texToSvg(texInput) {
-    const math = await mathjax.document('', {
-        InputJax: tex,
-        OutputJax: svg
-    });
-    
-    // 将 TeX 转换为 SVG
-    const node = math.convert(texInput, {
-        display: true, // true 表示显示模式 (display style), false 表示行内模式 (inline style)
-        em: 16,
-        ex: 8,
-        containerWidth: 80 * 16
-    });
+      // 从结果中提取 SVG 代码并输出
+      return adaptor.innerHTML(node);
+  }
 
-    // 从结果中提取 SVG 代码并输出
-    return adaptor.innerHTML(node);
-}
+  // 获取命令行传入的第一个参数作为 TeX 输入
+  const texInput = process.argv[2];
 
-// 获取命令行传入的第一个参数作为 TeX 输入
-const texInput = process.argv[2];
+  if (!texInput) {
+      console.error("用法: node convert.js \"<Your-TeX-String>\"");
+      process.exit(1);
+  }
 
-if (!texInput) {
-    console.error("用法: node convert.js \"<Your-TeX-String>\"");
-    process.exit(1);
-}
-
-// 运行转换并打印结果到控制台
-texToSvg(texInput).then(svgOutput => {
-    console.log(svgOutput);
-}).catch(err => {
-    console.error(err);
-});
+  // 运行转换并打印结果到控制台
+  texToSvg(texInput).then(svgOutput => {
+      console.log(svgOutput);
+  }).catch(err => {
+      console.error(err);
+  });
 #+END_SRC
 
 接下来在终端中进行测试，运行下面的命令，当前目录下应该会出现一个svg文件
@@ -456,5 +456,15 @@ sudo cp tex2svg /usr/local/bin
 ;; 1.5 表示放大到 150%，通常是一个比较舒适的大小
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 #+END_SRC
+** TODO 夜爬白云山
+:PROPERTIES:
+:EXPORT_FILE_NAME: 夜爬白云山
+:EXPORT_DATE: 2025-06-08
+:EXPORT_HUGO_CATEGORIES: Life
+:END:
 
-
+#+BEGIN_CENTER
+#+CAPTION: 白云山
+#+ATTR_HTML: :width 300
+[[https://cdn.jsdelivr.net/gh/chrisng2008/Cloud-Image-Hosting/Knowledge%20Graph/20250612231251097.png]]
+#+END_CENTER

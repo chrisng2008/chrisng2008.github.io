@@ -6,6 +6,7 @@
 // Config here to change theme color
 // Default | Mint Green | Cobalt Blue | Hot Pink | Dark Violet
 $theme-color-config: 'Default';
+//$theme-color-config: 'Default';
 
 // Default theme color map
 $theme-color-map: (
@@ -20,6 +21,7 @@ $theme-color-map: (
 // if it does not exist, use default theme color.
 @if not(map-has-key($theme-color-map, $theme-color-config)) {
   $theme-color-config: 'Default';
+  //$theme-color-config: 'Mint Green';
 }
 $theme-color-list: map-get($theme-color-map, $theme-color-config);
 
